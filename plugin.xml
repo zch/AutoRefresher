@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+   		 id="osxRefreshProvider"
+         point="org.eclipse.core.resources.refreshProviders">
+         <refreshProvider
+         	name="OS X Refresh Provider"
+         	class="org.vaadin.jonatan.autorefresher.OSXRefreshProvider">
+         </refreshProvider>
+   </extension>
+
+</plugin>

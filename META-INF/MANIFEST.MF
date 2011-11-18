@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: AutoRefresher
+Bundle-SymbolicName: AutoRefresher; singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Vendor: Jonatan Kronqvist
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Bundle-NativeCode: nativelib/libjnotify.so;osname=Linux;processor=x86, nativelib/libjnotify.dylib;osname=Mac OS X; processor=x86; processor=x86-64
