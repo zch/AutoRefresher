@@ -6,8 +6,8 @@ by eclipse on these operating systems.
 
 Installation
 ------------
-Download the bundle from http://vaadin.com/addon/AutoRefreshEclipse and copy the contents of the
-plugins directory to your eclipse/plugins/ directory.
+Download the bundle from http://vaadin.com/addon/autorefresher and copy the contents of the
+plugins directory to your eclipse/dropins/ directory.
 
 Start eclipse and open Preferences -> General -> Workspace and check the "Refresh using native
 hooks or polling" checkbox.
