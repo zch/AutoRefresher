@@ -1,6 +1,10 @@
 AutoRefresher
 =============
-
 AutoRefresher is a plugin for eclipse that implements automatic refreshing of file resources for
 Mac OS X and Linux using system events. The plugin replaces the default filesystem polling used
 by eclipse on these operating systems.
+
+Installation
+------------
+Download the bundle from http://vaadin.com/addon/AutoRefreshEclipse and copy the contents of the
+plugins directory to your eclipse/plugins/ directory.
