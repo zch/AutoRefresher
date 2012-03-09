@@ -6,9 +6,11 @@ Bundle-Version: 0.0.1
 Bundle-Vendor: Jonatan Kronqvist
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-NativeCode: nativelib/libjnotify.so;osname=Linux;processor=x86, nativelib/libjnotify.jnilib;osname=Mac OS X; processor=x86; processor=x86-64
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-NativeCode: 
+ nativelib/libnativefsevents.jnilib; 
+ osname=MacOSX; processor=x86-64
 Export-Package: org.vaadin.jonatan.autorefresher
-Bundle-ClassPath: lib/jnotify-0.93-patched.jar,
+Bundle-ClassPath: lib/nativefsevents.jar,
  .,
  nativelib/

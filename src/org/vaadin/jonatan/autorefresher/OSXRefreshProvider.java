@@ -1,64 +1,46 @@
 package org.vaadin.jonatan.autorefresher;
 
-import net.contentobjects.jnotify.JNotify;
-import net.contentobjects.jnotify.JNotifyException;
-import net.contentobjects.jnotify.JNotifyListener;
-
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.refresh.IRefreshMonitor;
 import org.eclipse.core.resources.refresh.IRefreshResult;
 import org.eclipse.core.resources.refresh.RefreshProvider;
+import org.vaadin.jonatan.nativefsevents.NativeFSEvents;
+import org.vaadin.jonatan.nativefsevents.NativeFSEvents.NativeFSEventListener;
 
-public class OSXRefreshProvider extends RefreshProvider implements IRefreshMonitor, JNotifyListener {
-
-	private final static int MASK = JNotify.FILE_ANY;
-	
-	private int watchId;
-
-	private IRefreshResult result;
-
-	private IResource resource;
+public class OSXRefreshProvider extends RefreshProvider {
 
 	@Override
-	public IRefreshMonitor installMonitor(IResource resource, IRefreshResult result) {
-		this.resource = resource;
-		this.result = result;
-		startMonitoring(resource.getLocation().toOSString());
-		return this;
+	public IRefreshMonitor installMonitor(IResource resource,
+			IRefreshResult result) {
+		return new Monitor(resource, result);
 	}
-	
-	public void startMonitoring(String path) {
-		try {
-			watchId = JNotify.addWatch(path, MASK, true, this);
-		} catch (JNotifyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+	private class Monitor implements IRefreshMonitor, NativeFSEventListener {
+		private IRefreshResult result;
+		private IResource resource;
+		private NativeFSEvents fsEvents;
+
+		public Monitor(IResource resource, IRefreshResult result) {
+			this.resource = resource;
+			this.result = result;
+			start();
+		}
+
+		private void start() {
+			String path = resource.getLocation().toOSString();
+			fsEvents = new NativeFSEvents(path, this);
+			fsEvents.startMonitoring();
+		}
+
+		public void unmonitor(IResource arg0) {
+			if (fsEvents != null) {
+				fsEvents.stopMonitoring();
+				fsEvents = null;
+			}
+		}
+
+		public void pathModified(String path) {
+			result.refresh(resource);
 		}
 	}
-	
-	public void unmonitor(IResource arg0) {
-		try {
-			JNotify.removeWatch(watchId);
-		} catch (JNotifyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void fileCreated(int wd, String rootPath, String name) {
-		result.refresh(resource);
-	}
-
-	public void fileDeleted(int wd, String rootPath, String name) {
-		result.refresh(resource);
-	}
-
-	public void fileModified(int wd, String rootPath, String name) {
-		result.refresh(resource);
-	}
-
-	public void fileRenamed(int wd, String rootPath, String oldName, String newName) {
-		result.refresh(resource);
-	}
-
 }
