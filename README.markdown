@@ -4,10 +4,8 @@ AutoRefresher is a plugin for eclipse that implements automatic refreshing of fi
 
 Installation
 ------------
-Download the bundle from http://vaadin.com/addon/autorefresher and copy the contents of the
-plugins directory to your eclipse/dropins/ directory.
+Download the bundle from http://vaadin.com/addon/autorefresher and copy the contents of the plugins directory to your eclipse/dropins/ directory.
 
-Start eclipse and open Preferences -> General -> Workspace and check the "Refresh using native
-hooks or polling" checkbox.
+Start eclipse and open Preferences -> General -> Workspace and check the "Refresh using native hooks or polling" checkbox.
 
 Enjoy!
