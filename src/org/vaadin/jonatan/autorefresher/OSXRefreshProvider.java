@@ -4,6 +4,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.refresh.IRefreshMonitor;
 import org.eclipse.core.resources.refresh.IRefreshResult;
 import org.eclipse.core.resources.refresh.RefreshProvider;
+import org.eclipse.core.runtime.CoreException;
 import org.vaadin.jonatan.nativefsevents.NativeFSEvents;
 import org.vaadin.jonatan.nativefsevents.NativeFSEvents.NativeFSEventListener;
 
@@ -40,7 +41,11 @@ public class OSXRefreshProvider extends RefreshProvider {
 		}
 
 		public void pathModified(String path) {
-			result.refresh(resource);
+			try {
+				resource.refreshLocal(IResource.DEPTH_INFINITE, null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
